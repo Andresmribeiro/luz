@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Camera, Upload, AlertCircle, CheckCircle2, Loader2, History, Leaf, Cpu, X } from 'lucide-react';
+import { Camera, Upload, AlertCircle, CheckCircle2, Loader2, History, Leaf, Search, X } from 'lucide-react';
 import { motion } from 'motion/react';
 import { diagnosePlant } from '../services/gemini';
 import { cn } from '../lib/utils';
@@ -41,8 +41,8 @@ export default function AIDiagnosisModule() {
       <div className="max-w-4xl mx-auto space-y-6 md:space-y-8">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight">Diagnóstico IA</h1>
-            <p className="text-sm text-slate-500 mt-1">Identifique pragas e doenças instantaneamente.</p>
+            <h1 className="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight">Pesquisa de Campo</h1>
+            <p className="text-sm text-slate-500 mt-1">Identifique pragas e doenças através de pesquisa técnica online.</p>
           </div>
           <Leaf className="text-emerald-500 hidden xs:block" size={32} />
         </div>
@@ -84,7 +84,7 @@ export default function AIDiagnosisModule() {
                     </label>
                   </div>
                   <div className="text-xs text-slate-400 font-medium">
-                    Selecione uma foto da planta para análise instantânea
+                    Selecione uma foto para pesquisa técnica instantânea
                   </div>
                 </div>
               )}
@@ -100,8 +100,8 @@ export default function AIDiagnosisModule() {
                   : "bg-emerald-600 text-white hover:bg-emerald-700 hover:scale-[1.02] active:scale-95"
               )}
             >
-              {loading ? <Loader2 className="animate-spin" /> : <Cpu size={20} />}
-              <span>{loading ? "Analisando..." : "Iniciar Diagnóstico"}</span>
+              {loading ? <Loader2 className="animate-spin" /> : <Search size={20} />}
+              <span>{loading ? "Pesquisando na internet..." : "Iniciar Pesquisa"}</span>
             </button>
           </div>
 

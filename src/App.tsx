@@ -28,8 +28,8 @@ import Map3DModule from './modules/Map3D';
 const modules = [
   { id: 'manejo', name: 'Manejo', icon: ClipboardList, color: 'bg-blue-500' },
   { id: 'soil', name: 'Análise de Solo', icon: Droplets, color: 'bg-amber-600' },
-  { id: 'drze', name: 'Dr. Zé', icon: Bot, color: 'bg-emerald-500' },
-  { id: 'ai', name: 'Diagnóstico IA', icon: Camera, color: 'bg-purple-500' },
+  { id: 'drze', name: 'Consultor Online', icon: Bot, color: 'bg-emerald-500' },
+  { id: 'ai', name: 'Pesquisa de Campo', icon: Camera, color: 'bg-purple-500' },
   { id: '3d', name: 'Safra', icon: Box, color: 'bg-indigo-500' },
 ];
 

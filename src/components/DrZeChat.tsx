@@ -15,8 +15,10 @@ interface Message {
   }[];
 }
 
-const SYSTEM_INSTRUCTION = `Você é o Dr. Zé, um especialista sênior em agronomia, mecânica agrícola e infraestrutura rural. 
+const SYSTEM_INSTRUCTION = `Você é o Consultor Online AgroPrecision, um especialista sênior que utiliza pesquisa em tempo real na internet para responder. 
 Sua personalidade é de um mentor experiente, prático e direto, que entende as dificuldades do dia a dia no campo.
+
+Para cada pergunta do usuário, você DEVE realizar uma pesquisa na internet para fornecer os dados mais recentes e precisos.
 
 Suas áreas de especialidade incluem:
 1. Agronomia: Manejo de pragas, correção de solo, adubação, épocas de plantio e colheita, e regras agronômicas brasileiras.
@@ -25,10 +27,10 @@ Suas áreas de especialidade incluem:
 4. Tecnologia: Agricultura de precisão, GPS, telemetria e drones.
 
 Você pode receber imagens e áudios. 
-- Se receber uma imagem de uma peça ou planta, analise-a detalhadamente para dar o diagnóstico.
+- Se receber uma imagem de uma peça ou planta, pesquise na internet por problemas similares atuais.
 - Se receber um áudio, responda em texto de forma clara.
 
-Sempre forneça respostas seguras. Se algo envolver risco elétrico ou mecânico grave, recomende a assistência de um profissional certificado, mas explique o diagnóstico básico.
+Sempre forneça respostas seguras. Se algo envolver risco elétrico ou mecânico grave, recomende a assistência de um profissional certificado, mas explique o diagnóstico básico baseado em manuais técnicos encontrados online.
 Use termos técnicos quando necessário, mas explique-os de forma simples.
 Você tem acesso ao Google Search para informações atualizadas sobre preços de commodities, clima e lançamentos de máquinas.`;
 
@@ -36,7 +38,7 @@ export default function DrZeChat() {
   const [messages, setMessages] = useState<Message[]>([
     { 
       role: 'model', 
-      text: 'Olá! Sou o Dr. Zé. Como posso te ajudar na lida de hoje? Pode perguntar sobre mecânica de trator, manejo de pragas ou até aquela fiação do galpão que tá dando dor de cabeça. Agora você também pode me enviar fotos das suas máquinas ou plantas, e até me mandar áudio!', 
+      text: 'Olá! Sou seu Consultor Online. Como posso te ajudar na lida de hoje? Realizo pesquisas em tempo real para te dar a melhor resposta sobre mecânica, manejo ou infraestrutura.', 
       timestamp: new Date() 
     }
   ]);
@@ -198,10 +200,10 @@ export default function DrZeChat() {
             <Bot className="text-white" size={24} />
           </div>
           <div>
-            <h3 className="text-white font-bold leading-tight">Dr. Zé</h3>
+            <h3 className="text-white font-bold leading-tight">Consultor Online</h3>
             <div className="flex items-center space-x-1">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span className="text-[10px] text-emerald-400 font-bold uppercase tracking-widest">Especialista Rural IA</span>
+              <span className="text-[10px] text-emerald-400 font-bold uppercase tracking-widest">Pesquisa em Tempo Real</span>
             </div>
           </div>
         </div>
@@ -255,7 +257,7 @@ export default function DrZeChat() {
           <div className="flex justify-start">
             <div className="bg-white p-4 rounded-2xl rounded-tl-none border border-slate-100 shadow-sm flex items-center space-x-2">
               <Loader2 className="animate-spin text-emerald-500" size={18} />
-              <span className="text-xs text-slate-400 font-medium italic">Dr. Zé está consultando os manuais...</span>
+              <span className="text-xs text-slate-400 font-medium italic">Consultando informações na internet...</span>
             </div>
           </div>
         )}
@@ -322,7 +324,7 @@ export default function DrZeChat() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyPress={(e) => e.key === 'Enter' && handleSend()}
-              placeholder={isRecording ? "Gravando áudio..." : "Pergunte ao Dr. Zé..."}
+              placeholder={isRecording ? "Gravando áudio..." : "Pesquisar no Consultor..."}
               className="flex-1 bg-transparent border-none outline-none px-2 text-sm text-slate-800 placeholder:text-slate-400"
               disabled={isRecording}
             />

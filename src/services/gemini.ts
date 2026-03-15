@@ -9,7 +9,7 @@ export async function diagnosePlant(base64Image: string) {
       contents: [
         {
           parts: [
-            { text: "Você é um agrônomo especialista. Analise esta imagem de uma planta e identifique possíveis doenças, deficiências nutricionais ou pragas. Forneça o diagnóstico, a causa provável e recomendações de tratamento em português. Responda em formato JSON com as chaves: 'diagnostico', 'causa', 'recomendacoes', 'gravidade' (baixa, media, alta)." },
+            { text: "Você é um consultor agrícola que utiliza pesquisa em tempo real na internet. Analise esta imagem de uma planta e, se necessário, pesquise na internet por pragas ou doenças similares que estejam ocorrendo atualmente na região ou época do ano. Forneça o diagnóstico baseado em dados atualizados, a causa provável e recomendações de tratamento em português. Responda em formato JSON com as chaves: 'diagnostico', 'causa', 'recomendacoes', 'gravidade' (baixa, media, alta)." },
             {
               inlineData: {
                 mimeType: "image/jpeg",
@@ -21,6 +21,7 @@ export async function diagnosePlant(base64Image: string) {
       ],
       config: {
         responseMimeType: "application/json",
+        tools: [{ googleSearch: {} }],
       }
     });
 

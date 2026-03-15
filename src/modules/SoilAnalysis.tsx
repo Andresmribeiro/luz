@@ -25,17 +25,18 @@ const functionDeclarations: FunctionDeclaration[] = [
   }
 ];
 
-const SOIL_SYSTEM_INSTRUCTION = `Você é o Dr. Zé, consultor sênior em fertilidade de solos.
-Sua missão é analisar laudos de análise de solo (fotos de papel ou arquivos) e fornecer recomendações agronômicas precisas.
+const SOIL_SYSTEM_INSTRUCTION = `Você é o Consultor Online AgroPrecision, especialista em fertilidade de solos.
+Sua missão é analisar laudos de análise de solo (fotos de papel ou arquivos) e fornecer recomendações agronômicas precisas baseadas em dados técnicos atualizados da internet.
 
 Ao analisar um laudo:
 1. Identifique os níveis de pH, Matéria Orgânica, Argila, Fósforo, Potássio e Alumínio.
-2. Determine a necessidade de Calagem (correção de acidez) usando o método de Saturação por Bases (V%).
-3. Recomende a adubação de plantio e cobertura baseada na cultura que o usuário mencionar (ou sugira culturas aptas para aquele solo).
-4. Explique o tipo de solo (Arenoso, Argiloso ou Médio) baseado no teor de argila.
-5. Siga as regras agronômicas brasileiras (Ex: Boletim 100 ou manuais regionais).
+2. Utilize pesquisa na internet para validar as recomendações de Calagem e Adubação de acordo com as normas regionais mais recentes.
+3. Determine a necessidade de Calagem (correção de acidez) usando o método de Saturação por Bases (V%).
+4. Recomende a adubação de plantio e cobertura baseada na cultura que o usuário mencionar (ou sugira culturas aptas para aquele solo).
+5. Explique o tipo de solo (Arenoso, Argiloso ou Médio) baseado no teor de argila.
+6. Siga as regras agronômicas brasileiras e valide informações via pesquisa online.
 
-Seja prático, direto e use uma linguagem que o produtor entenda, mas sem perder o rigor técnico.`;
+Seja prático, direto e use uma linguagem que o produtor entenda, mas sem perder o rigor técnico. Sempre cite que as informações foram validadas via pesquisa online.`;
 
 export default function SoilAnalysisModule() {
   const [samples, setSamples] = useState<SoilSample[]>([]);
@@ -43,7 +44,7 @@ export default function SoilAnalysisModule() {
   const [isAiLoading, setIsAiLoading] = useState(false);
   const [isRecording, setIsRecording] = useState(false);
   const [chatMessages, setChatMessages] = useState<{role: 'user' | 'model', text: string}[]>([
-    { role: 'model', text: 'Olá! Sou o Dr. Zé. Envie uma foto do seu laudo de análise de solo ou anexe o arquivo para eu analisar e te passar as recomendações de correção e adubação.' }
+    { role: 'model', text: 'Olá! Sou o Consultor Online AgroPrecision. Envie uma foto do seu laudo de análise de solo ou anexe o arquivo para eu analisar e te passar as recomendações de correção e adubação validadas via internet.' }
   ]);
   const [attachedFile, setAttachedFile] = useState<{url: string, type: string, data: string} | null>(null);
   const [chatInput, setChatInput] = useState('');
@@ -147,8 +148,8 @@ export default function SoilAnalysisModule() {
           }
         ],
         config: {
-          systemInstruction: "Você é o assistente Dr. Zé. Identifique a intenção de adicionar amostras de solo.",
-          tools: [{ functionDeclarations: functionDeclarations }]
+          systemInstruction: "Você é o Consultor Online AgroPrecision. Identifique a intenção de adicionar amostras de solo. Utilize pesquisa na internet se necessário para validar parâmetros.",
+          tools: [{ functionDeclarations: functionDeclarations }, { googleSearch: {} }]
         }
       });
 
@@ -420,10 +421,10 @@ export default function SoilAnalysisModule() {
                 <Bot className="text-white" size={18} />
               </div>
               <div>
-                <h4 className="text-white font-bold text-sm">Consultoria Dr. Zé</h4>
+                <h4 className="text-white font-bold text-sm">Consultoria Online</h4>
                 <div className="flex items-center space-x-1">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                  <span className="text-[10px] text-emerald-400 font-bold uppercase">Análise de Laudos</span>
+                  <span className="text-[10px] text-emerald-400 font-bold uppercase">Pesquisa Técnica Online</span>
                 </div>
               </div>
             </div>
@@ -450,7 +451,7 @@ export default function SoilAnalysisModule() {
               <div className="flex justify-start">
                 <div className="bg-white p-3 rounded-2xl border border-slate-100 shadow-sm flex items-center space-x-2">
                   <Loader2 className="animate-spin text-emerald-500" size={16} />
-                  <span className="text-xs text-slate-400 font-medium italic">Dr. Zé está analisando o laudo...</span>
+                  <span className="text-xs text-slate-400 font-medium italic">Consultando informações na internet...</span>
                 </div>
               </div>
             )}

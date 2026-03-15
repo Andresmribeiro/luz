@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { ClipboardList, Calendar, CheckCircle2, Clock, AlertTriangle, Filter, Plus, Map as MapIcon, Trash2, Edit, X, Mic, Square, Loader2, Bot } from 'lucide-react';
+import { ClipboardList, Calendar, CheckCircle2, Clock, AlertTriangle, Filter, Plus, Map as MapIcon, Trash2, Edit, X, Mic, Square, Loader2, Search } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { cn } from '../lib/utils';
 import { GoogleGenAI, Type, FunctionDeclaration } from "@google/genai";
@@ -201,13 +201,13 @@ export default function ManejoModule() {
             role: "user",
             parts: [
               { inlineData: { data: base64Audio, mimeType: "audio/webm" } },
-              { text: "Interprete o comando de voz para gerenciar as tarefas de manejo agrícola. Use as ferramentas disponíveis para criar, editar ou excluir tarefas." }
+              { text: "Interprete o comando de voz para gerenciar as tarefas de manejo agrícola. Use as ferramentas disponíveis para criar, editar ou excluir tarefas. Se necessário, pesquise na internet por melhores práticas para a tarefa solicitada." }
             ]
           }
         ],
         config: {
-          systemInstruction: "Você é o assistente Dr. Zé. Sua função é gerenciar tarefas de manejo agrícola via comandos de voz. Você deve identificar a intenção do usuário (criar, deletar ou atualizar status) e chamar a função correspondente. Se o usuário não especificar a data, use a data de hoje: " + new Date().toISOString().split('T')[0],
-          tools: [{ functionDeclarations: functionDeclarations }]
+          systemInstruction: "Você é o Consultor Online AgroPrecision. Sua função é gerenciar tarefas de manejo agrícola via comandos de voz. Você deve identificar a intenção do usuário (criar, deletar ou atualizar status) e chamar a função correspondente. Utilize pesquisa na internet para validar datas ideais ou melhores práticas se solicitado. Se o usuário não especificar a data, use a data de hoje: " + new Date().toISOString().split('T')[0],
+          tools: [{ functionDeclarations: functionDeclarations }, { googleSearch: {} }]
         }
       });
 
@@ -297,7 +297,7 @@ export default function ManejoModule() {
           </div>
         </div>
 
-        {/* AI Status Indicator */}
+        {/* Search Status Indicator */}
         <AnimatePresence>
           {isAiLoading && (
             <motion.div 
@@ -306,8 +306,8 @@ export default function ManejoModule() {
               exit={{ opacity: 0, y: -10 }}
               className="bg-emerald-600 text-white px-4 py-2 rounded-xl flex items-center justify-center space-x-2 shadow-lg"
             >
-              <Bot size={16} />
-              <span className="text-xs font-bold">Dr. Zé está processando seu comando...</span>
+              <Search size={16} />
+              <span className="text-xs font-bold">Consultando informações na internet...</span>
             </motion.div>
           )}
         </AnimatePresence>
