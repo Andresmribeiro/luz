@@ -1,0 +1,9 @@
+{
+  "name": "AgroPrecision AI",
+  "description": "Plataforma completa de agricultura de precisão com georreferenciamento, análise de solo, diagnóstico por IA e gestão de propriedade.",
+  "requestFramePermissions": [
+    "geolocation",
+    "camera",
+    "microphone"
+  ]
+}

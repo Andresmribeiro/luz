@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">AgroPrecision</string>
+    <string name="title_activity_main">AgroPrecision</string>
+    <string name="package_name">com.agroprecision.app</string>
+    <string name="custom_url_scheme">com.agroprecision.app</string>
+</resources>
